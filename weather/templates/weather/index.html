@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+        <h1>Привет, @{{ user.username }}!</h1>
+        <a href="{% url 'user:logout' %}">Выйти?</a>
+    {% else %}
+        <h1>Привет, без регистрации функционал ограничен!</h1>
+        <h2>* запросы погоды сохраняются только за авторизованными пользователями</h2>
+        <li>
+            <a href="{% url 'user:login' %}">Войти</a>
+        </li>
+        <li>
+            <a href="{% url 'user:registration' %}">Регистрация</a>
+        </li>
+    {% endif %}
+    <h2>API:</h2>
+    <a href="{% url 'api:city-counts' %}">/api/city-counts/</a>
+    <h1>Прогноз погоды в вашем городе:</h1>
+    {% if last_city %}
+        <h2>Ваш последний запрос: <a href="?city={{ last_city.city }}">{{ last_city.city }}</a></h2>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Найти!</button>
+    </form>
+    {% if weather_data %}
+        <h2>Погода в городе {{ weather_data.city }}</h2>
+        {% for day in weather_data.forecast %}
+            <h3>{{ day.day }}</h3>
+            <p>Максимальная температура: {{ day.max_temp }}°C</p>
+            <p>Минимальная температура: {{ day.min_temp }}°C</p>
+            <p>Осадки: {{ day.precipitation }} мм</p>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>

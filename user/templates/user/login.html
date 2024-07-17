@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+    {% if messages %}
+        {% for message in messages %} {{ message }} {% endfor %}
+    {% endif %}
+    <h1>Логин</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Войти!</button>
+    </form>
+</body>
+</html>
