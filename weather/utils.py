@@ -1,5 +1,5 @@
-from django.db import models
 import requests
+from django.db import models
 from geopy.geocoders import Nominatim
 
 

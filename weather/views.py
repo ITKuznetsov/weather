@@ -1,10 +1,12 @@
-from django.views import View
 from django.shortcuts import render
+from django.views import View
 
 from common.views import TitleMixin, WeatherTitleMixin
+
 from .forms import CityForm
-from .utils import get_weather
 from .models import SearchHistory
+from .utils import get_weather
+
 
 class WeatherView(WeatherTitleMixin, View):
     form_class = CityForm
