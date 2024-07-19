@@ -49,10 +49,9 @@
    python manage.py migrate
    ```
 ## Локальный запуск с использованием контейнеризации (Linux)
-1. Создайте и активируйте виртуальное окружение
+1. Создайте файл .env и установите необходимые ключи для SECRET_KEY и подключения к СУБД PostgreSQL (SECRET_KEY, NAME_DB, USER_DB, PASSWORD_DB)
    ```bash
-   python -m venv ../venv
-   source ../venv/bin/activate
+   touch .env
    ```
 2. Создайте и запустите контейнеры
    ```bash
